@@ -1,0 +1,23 @@
+service: rsshub
+
+provider:
+  name: aliyun
+  runtime: nodejs8
+  credentials: ~/.aliyuncli/credentials # path must be absolute
+
+plugins:
+  - serverless-aliyun-function-compute
+
+package:
+  exclude:
+    - package-lock.json
+    - .gitignore
+    - .git/**
+
+functions:
+  main:
+    handler: serverless.main
+    events:
+      - http:
+          path: /
+          method: get
